@@ -1,0 +1,108 @@
+package com.example.myapplication.screens
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.myapplication.ui.theme.*
+@Composable
+fun WelcomeScreen(navController: NavController) {
+    Box(modifier = Modifier.fillMaxSize().background(Purple)) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
+                DecorativeElements()
+                PhoneWithPersonIllustration()
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(White, shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
+                    .padding(horizontal = 32.dp, vertical = 40.dp)
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("Hello", fontSize = 32.sp, fontWeight = FontWeight.ExtraBold, color = TextDark)
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text("Welcome To Little Drop, where\nyou manage you daily tasks",
+                        fontSize = 14.sp, color = TextGray, textAlign = TextAlign.Center)
+
+                    Spacer(modifier = Modifier.height(32.dp))
+
+                    Button(
+                        onClick = { navController.navigate("login") },
+                        modifier = Modifier.fillMaxWidth().height(52.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Purple),
+                        shape = RoundedCornerShape(50)
+                    ) {
+                        Text("Login", fontSize = 16.sp, color = White)
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    OutlinedButton(
+                        onClick = { navController.navigate("signup") },
+                        modifier = Modifier.fillMaxWidth().height(52.dp),
+                        border = androidx.compose.foundation.BorderStroke(2.dp, Purple),
+                        shape = RoundedCornerShape(50)
+                    ) {
+                        Text("Sign Up", fontSize = 16.sp, color = Purple)
+                    }
+
+                    Spacer(modifier = Modifier.height(28.dp))
+                    Text("Sign up using", fontSize = 13.sp, color = TextGray)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                        SocialCircle(FacebookBlue, "f")
+                        SocialCircle(GoogleRed, "G")
+                        SocialCircle(LinkedInBlue, "in")
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SocialCircle(color: Color, label: String) {
+    Box(modifier = Modifier.size(40.dp).background(color, CircleShape), contentAlignment = Alignment.Center) {
+        Text(text = label, color = White, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+    }
+}
+
+@Composable
+private fun DecorativeElements() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.size(8.dp).align(Alignment.TopCenter).offset(y = 24.dp).background(White, CircleShape))
+        Box(modifier = Modifier.size(20.dp).align(Alignment.TopEnd).offset(x = (-32).dp, y = 40.dp).border(2.dp, White.copy(alpha = 0.6f), CircleShape))
+        Text("+", color = White.copy(alpha = 0.5f), fontSize = 20.sp, modifier = Modifier.align(Alignment.TopStart).offset(x = 28.dp, y = 80.dp))
+    }
+}
+
+@Composable
+private fun PhoneWithPersonIllustration() {
+    Box(modifier = Modifier.size(220.dp), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.width(130.dp).height(200.dp).background(Color(0xFF1C1C3A), RoundedCornerShape(24.dp)).border(3.dp, Color(0xFF2E2E5E), RoundedCornerShape(24.dp)))
+        PersonFigure(modifier = Modifier.align(Alignment.CenterEnd).offset(x = (-4).dp, y = 10.dp))
+    }
+}
+
+@Composable
+private fun PersonFigure(modifier: Modifier = Modifier) {
+    val skinColor = Color(0xFFFFCBA4)
+    Column(modifier = modifier.width(50.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(modifier = Modifier.size(26.dp).background(skinColor, CircleShape))
+        Spacer(modifier = Modifier.height(2.dp))
+        Box(modifier = Modifier.width(32.dp).height(40.dp).background(Purple, RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)))
+    }
+}
