@@ -67,6 +67,11 @@ fun WelcomeScreen(navController: NavController) {
                         SocialCircle(GoogleRed, "G")
                         SocialCircle(LinkedInBlue, "in")
                     }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                    TextButton(onClick = { navController.navigate("contacts") }) { // <-- Ruta en inglés
+                        Text("Go to My Contacts", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Purple) // <-- Texto en inglés
+                    }
                 }
             }
         }

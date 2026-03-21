@@ -4,19 +4,20 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-// Asegúrate de que estos imports coincidan con la ubicación de tus archivos
+
+// Tus imports de las pantallas
 import com.example.myapplication.screens.WelcomeScreen
 import com.example.myapplication.screens.LoginScreen
 import com.example.myapplication.screens.SignUpScreen
+import com.example.myapplication.screens.ContactsScreen
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    // El NavHost gestiona el cambio entre pantallas mediante "rutas" (strings)
     NavHost(
         navController = navController,
-        startDestination = "welcome" // La pantalla que se ve al abrir la app
+        startDestination = "welcome"
     ) {
         // Pantalla de Bienvenida
         composable("welcome") {
@@ -31,6 +32,10 @@ fun AppNavigation() {
         // Pantalla de Registro
         composable("signup") {
             SignUpScreen(navController)
+        }
+
+        composable("contacts") {
+            ContactsScreen(navController)
         }
     }
 }
